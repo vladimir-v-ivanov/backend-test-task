@@ -90,13 +90,13 @@ readonly class ProductService
 
         try {
             $paymentProcessor->process($price);
+
+            $order->setStatus('paid');
+            $this->entityManager->persist($order);
+            $this->entityManager->flush();
         } catch (Throwable) {
             // do some actions
         }
-
-        $order->setStatus('paid');
-        $this->entityManager->persist($order);
-        $this->entityManager->flush();
 
         return [$price, $order];
     }
