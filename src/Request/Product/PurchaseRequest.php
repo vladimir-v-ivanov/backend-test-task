@@ -5,7 +5,6 @@ namespace App\Request\Product;
 use App\Type\TaxNumber as TaxNumberType;
 use App\Validator\Constraint\TaxNumber;
 use Symfony\Component\Validator\Constraints\Choice;
-use Symfony\Component\Validator\Constraints\Country;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Positive;
 

@@ -2,8 +2,6 @@
 
 namespace App\Type;
 
-use Symfony\Component\Validator\Constraints\NotBlank;
-
 readonly class TaxNumber
 {
     public function __construct(private string $number)

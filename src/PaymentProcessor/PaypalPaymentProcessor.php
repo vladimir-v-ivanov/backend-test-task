@@ -4,7 +4,6 @@ namespace App\PaymentProcessor;
 
 use Exception;
 use Systemeio\TestForCandidates\PaymentProcessor\PaypalPaymentProcessor as ExternalPaypalPaymentProcessor;
-use Throwable;
 
 class PaypalPaymentProcessor implements PaymentProcessorInterface
 {

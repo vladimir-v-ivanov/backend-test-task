@@ -15,7 +15,6 @@ use App\Repository\ProductRepository;
 use App\Repository\TaxValueRepository;
 use App\Type\TaxNumber;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Throwable;
 
 readonly class ProductService
