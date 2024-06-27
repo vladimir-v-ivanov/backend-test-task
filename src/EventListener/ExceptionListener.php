@@ -2,13 +2,9 @@
 
 namespace App\EventListener;
 
-use App\Exception\EntityValidationViolation;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
-use function Symfony\Component\DependencyInjection\Loader\Configurator\iterator;
 
 class ExceptionListener
 {
@@ -29,7 +25,7 @@ class ExceptionListener
         $response = new JsonResponse([
             'result' => false,
             'errors' => $errors
-        ]);
+        ], 400);
 
         $event->allowCustomResponseCode();
         $event->setResponse($response);

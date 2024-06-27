@@ -20,7 +20,7 @@ readonly class CalculatePriceRequest
         private string $taxNumber,
 
         #[NotBlank(allowNull: true)]
-        private string $couponCode
+        private ?string $couponCode
     ) {
         $this->taxNumberType = new TaxNumberType($this->taxNumber);
     }
@@ -40,7 +40,7 @@ readonly class CalculatePriceRequest
         return $this->taxNumberType;
     }
 
-    public function getCouponCode(): string
+    public function getCouponCode(): ?string
     {
         return $this->couponCode;
     }

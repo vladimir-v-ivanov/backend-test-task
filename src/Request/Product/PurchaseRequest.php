@@ -22,7 +22,7 @@ readonly class PurchaseRequest
         private string $taxNumber,
 
         #[NotBlank(allowNull: true)]
-        private string $couponCode,
+        private ?string $couponCode,
 
         #[Choice(['paypal', 'stripe'])]
         private string $paymentProcessor,
@@ -45,7 +45,7 @@ readonly class PurchaseRequest
         return $this->taxNumberType;
     }
 
-    public function getCouponCode(): string
+    public function getCouponCode(): ?string
     {
         return $this->couponCode;
     }
