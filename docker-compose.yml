@@ -1,13 +1,40 @@
 services:
-    sio_test:
-        user: app
-        build:
-            context: .
-            args:
-                USER_ID: ${USER_ID:-1000}
-        ports:
-            - "8337:8337"
-        volumes:
-            - .:/app:rw
-        environment:
-            - APP_ENV=dev
+  sio_test:
+    user: app
+    build:
+      context: .
+      args:
+        USER_ID: ${USER_ID:-1000}
+    ports:
+      - "8337:8337"
+    networks:
+      - sio_network
+    volumes:
+      - .:/app:rw
+    environment:
+      - APP_ENV=dev
+    depends_on:
+      - sio_database
+
+  sio_database:
+    image: postgres:15.4-alpine3.18
+    environment:
+      POSTGRES_DB: products
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - sio_db_volume:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    networks:
+      - sio_network
+
+networks:
+  sio_network:
+    driver: bridge
+    enable_ipv6: false
+
+volumes:
+  sio_db_volume:

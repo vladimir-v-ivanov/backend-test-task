@@ -10,7 +10,7 @@ PHONY: help
 help: ## This help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-init: down build install up success-message console ## Initialize environment
+init: down build install up success-message migrate load-fixtures console ## Initialize environment
 
 build: ## Build services.
 	${DC} build $(c)
@@ -38,3 +38,9 @@ install: ## Install dependencies without running the whole application.
 success-message:
 	@echo "You can now access the application at http://localhost:8337"
 	@echo "Good luck! 🚀"
+
+migrate:
+	${DC_EXEC} /bin/bash -c "php bin/console --no-interaction doctrine:migrations:migrate"
+
+load-fixtures:
+	${DC_EXEC} /bin/bash -c "php bin/console --no-interaction doctrine:fixtures:load"
